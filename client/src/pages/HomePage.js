@@ -1,9 +1,10 @@
 import React from "react";
+import Home from "../components/layouts/Herosection/Home";
 
 const HomePage = () => {
   return (
     <div>
-      <h1>Home</h1>
+     <Home/>
     </div>
   );
 };
