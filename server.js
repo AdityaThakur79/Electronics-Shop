@@ -3,6 +3,7 @@ import colors from "colors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
 
 //Configure Dotenv
 dotenv.config();
@@ -16,6 +17,9 @@ const app = express();
 //middlewares
 app.use(express.json());
 app.use(morgan("dev"));
+
+//rotues
+app.use("/api/auth/", authRoutes);
 
 //Rest API
 app.get("/", (req, res) => {
