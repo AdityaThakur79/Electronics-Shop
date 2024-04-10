@@ -1,15 +1,26 @@
 import React from "react";
-import Footer from "./footer/Footer";
-import Header from "./header/Header";
+import Helmet from "react-helmet";
 
-const Layouts = ({ children }) => {
+const Layouts = ({ children, title, description, keywords, author }) => {
   return (
     <div>
-      <Header />
+      <Helmet>
+        <meta charSet="UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <meta name="author" content={author} />
+        <title>{title}</title>
+      </Helmet>
       <main>{children}</main>
-      <Footer />
     </div>
   );
 };
+
+// Layouts.defaultProps = {
+//   title: "Electronic Shop",
+//   description: "Mern Stack Project",
+//   keywords: "mern,node,express,react,mongodb",
+//   author: "Aditya Thakur",
+// };
 
 export default Layouts;
