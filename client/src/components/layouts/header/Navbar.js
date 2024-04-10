@@ -9,10 +9,8 @@ const Navbar = () => {
       <header className="header">
         <div className="container d_flex">
           <div className="catgrories d_flex">
-            <span class="fa-solid fa-border-all"></span>
-            <h4>
-              Shop Today
-            </h4>
+            <span className="fa-solid fa-border-all"></span>
+            <h4>Shop Today</h4>
           </div>
 
           <div className="navlink">

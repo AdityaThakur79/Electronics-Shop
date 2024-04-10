@@ -1,5 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
+import { Toaster } from "react-hot-toast";
 
 const Layouts = ({ children, title, description, keywords, author }) => {
   return (
@@ -11,7 +12,10 @@ const Layouts = ({ children, title, description, keywords, author }) => {
         <meta name="author" content={author} />
         <title>{title}</title>
       </Helmet>
-      <main>{children}</main>
+      <main>
+        <Toaster />
+        {children}
+      </main>
     </div>
   );
 };

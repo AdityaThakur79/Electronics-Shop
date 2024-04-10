@@ -8,6 +8,9 @@ import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import NoPageFound from "./pages/NoPageFound";
+import Register from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
+
 function App() {
   return (
     <>
@@ -20,7 +23,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NoPageFound />} />
         </Routes>
         <Footer />
