@@ -102,3 +102,19 @@ export const loginController = async (req, res) => {
     });
   }
 };
+
+export const testController = async (req, res) => {
+  try {
+    return res.status(200).send({
+      success: true,
+      message: "Protected Routes",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Login",
+      error,
+    });
+  }
+};
