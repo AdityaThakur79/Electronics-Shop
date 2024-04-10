@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Search = ({ CartItem }) => {
-  
   // fixed Header
   window.addEventListener("scroll", function () {
     const search = document.querySelector(".search");
@@ -26,11 +25,11 @@ const Search = ({ CartItem }) => {
           </div>
 
           <div className="icon f_flex width">
-            <i className="fa fa-user icon-circle"></i>
+            <Link to="/register" style={{ margin: "10px" }}>Register</Link>
+            <Link to="/login" style={{ margin: "10px" }}>Login</Link>
             <div className="cart">
               <Link to="/cart">
                 <i className="fa fa-shopping-bag icon-circle"></i>
-                {/* <span>{CartItem.length === 0 ? "" : CartItem.length}</span> */}
               </Link>
             </div>
           </div>

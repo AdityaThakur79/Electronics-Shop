@@ -6,7 +6,8 @@ import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
-import NoPageFound   from "./pages/NoPageFound";
+import Cart from "./pages/Cart";
+import NoPageFound from "./pages/NoPageFound";
 function App() {
   return (
     <>
@@ -16,6 +17,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/products" element={<Product />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NoPageFound />} />
         </Routes>
