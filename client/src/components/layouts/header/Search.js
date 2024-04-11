@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../context/auth";
+import toast from "react-hot-toast";
 
 const Search = ({ CartItem }) => {
   // fixed Header
@@ -8,6 +10,17 @@ const Search = ({ CartItem }) => {
     search.classList.toggle("active", window.scrollY > 100);
   });
 
+  const [auth, setAuth] = useAuth();
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logout Successfully");
+  };
   return (
     <>
       <section className="search">
@@ -25,8 +38,26 @@ const Search = ({ CartItem }) => {
           </div>
 
           <div className="icon f_flex width">
-            <Link to="/register" style={{ margin: "10px" }}>Register</Link>
-            <Link to="/login" style={{ margin: "10px" }}>Login</Link>
+            {!auth.user ? (
+              <>
+                <Link to="/register" style={{ margin: "10px" }}>
+                  Register
+                </Link>
+                <Link to="/login" style={{ margin: "10px" }}>
+                  Login
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  style={{ margin: "10px" }}
+                  onClick={handleLogout}
+                >
+                  Logout <i className="fa-solid fa-right-from-bracket"></i>
+                </Link>
+              </>
+            )}
             <div className="cart">
               <Link to="/cart">
                 <i className="fa fa-shopping-bag icon-circle"></i>
