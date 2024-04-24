@@ -10,6 +10,9 @@ import Cart from "./pages/Cart";
 import NoPageFound from "./pages/NoPageFound";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
+import Dashboard from "./pages/user/Dashboard";
+import Private from "./Routes/Private";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
 
 function App() {
   return (
@@ -25,6 +28,10 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/dashboard" element={<Private />}>
+            <Route path="" element={<Dashboard />} />
+          </Route>
           <Route path="*" element={<NoPageFound />} />
         </Routes>
         <Footer />

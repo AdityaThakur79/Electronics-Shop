@@ -12,6 +12,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("");
 
   const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ const Register = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/auth/register`,
-        { name, email, password, phone, address }
+        { name, email, password, phone, address, answer }
       );
 
       if (res && res.data.success) {
@@ -93,6 +94,17 @@ const Register = () => {
                 value={address}
                 onChange={(e) => {
                   setAddress(e.target.value);
+                }}
+              />
+            </div>
+            <div className="input-box">
+              <input
+                type="text"
+                placeholder="What is Your Favourite Food"
+                required
+                value={answer}
+                onChange={(e) => {
+                  setAnswer(e.target.value);
                 }}
               />
             </div>

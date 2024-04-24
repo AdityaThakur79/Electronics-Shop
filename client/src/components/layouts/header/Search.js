@@ -49,13 +49,22 @@ const Search = ({ CartItem }) => {
               </>
             ) : (
               <>
-                <Link
-                  to="/login"
-                  style={{ margin: "10px" }}
-                  onClick={handleLogout}
-                >
-                  Logout <i className="fa-solid fa-right-from-bracket"></i>
-                </Link>
+                <div class="dropdown">
+                  <button class="dropbtn" />
+                  <img src="/images/pp.jpg" alt="Profile" class="profile-img" />
+                  <div class="dropdown-content">
+                    <Link to="/" style={{ margin: "10px" }}>
+                      Dashboard
+                    </Link>
+                    <Link
+                      to="/login"
+                      style={{ margin: "10px" }}
+                      onClick={handleLogout}
+                    >
+                      Logout <i className="fa-solid fa-right-from-bracket"></i>
+                    </Link>
+                  </div>
+                </div>
               </>
             )}
             <div className="cart">

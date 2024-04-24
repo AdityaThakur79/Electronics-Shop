@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Layouts from "../../components/layouts/Layouts";
 import "./Register.css";
-import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [auth, setAuth] = useAuth();
+  const location = useLocation();
 
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const Login = () => {
           token: res.data.token,
         });
         localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate("/");
+        navigate(location.state || "/");
       }
     } catch (error) {
       console.log(error);
@@ -71,9 +71,15 @@ const Login = () => {
             <div className="input-box button">
               <input type="Submit" defaultValue="Login" />
             </div>
+
             <div className="text">
               <h3>
                 Don't have an account?<Link to="/login">Register now</Link>
+              </h3>
+            </div>
+            <div className="text">
+              <h3>
+                <Link to="/forgot-password">Forgot Password</Link>
               </h3>
             </div>
           </form>

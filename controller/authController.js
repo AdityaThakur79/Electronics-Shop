@@ -5,7 +5,7 @@ import JWT from "jsonwebtoken";
 //REGISTER
 export const registerController = async (req, res) => {
   try {
-    const { name, email, password, phone, address } = req.body;
+    const { name, email, password, phone, address,answer } = req.body;
 
     //validations
     if (!name) return res.send({ message: "Name is required" });
@@ -13,6 +13,7 @@ export const registerController = async (req, res) => {
     if (!password) return res.send({ message: "Password is required" });
     if (!phone) return res.send({ message: "Phone is required" });
     if (!address) return res.send({ message: "Address is required" });
+    if (!answer) return res.send({ message: "Answer is required" });
 
     //existing Users
     const existingUser = await userModel.findOne({ email: email });
@@ -32,6 +33,7 @@ export const registerController = async (req, res) => {
       phone,
       address,
       password: hashedPassword,
+      answer
     }).save();
 
     res.status(200).send({
@@ -114,6 +116,45 @@ export const testController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error in Login",
+      error,
+    });
+  }
+};
+
+//FORGOT PASSWORD
+export const forgotPasswordController = async (req, res) => {
+  try {
+    const { email, answer, newpassword } = req.body;
+    if (!email) {
+      res.status(400).send({ message: "Email is Required" });
+    }
+    if (!answer) {
+      res.status(400).send({ message: "Answer is Required" });
+    }
+    if (!newpassword) {
+      res.status(400).send({ message: "Password is Required" });
+    }
+
+    const user = await userModel.findOne({ email, answer });
+
+    if (!user) {
+      return res.status(404).send({
+        succes: false,
+        message: "Wrong Email or Answer",
+      });
+    }
+
+    const hashedPassword = await hashPassword(newpassword);
+    await userModel.findByIdAndUpdate(user._id, { password: hashedPassword });
+    res.status(200).send({
+      success: true,
+      message: "Password Changed Succefully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.statu(500).send({
+      success: false,
+      message: "Something Went Wrong",
       error,
     });
   }
