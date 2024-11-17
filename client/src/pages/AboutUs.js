@@ -1,11 +1,8 @@
 import React from "react";
-import Layouts from "../components/layouts/Layouts";
-const About = () => {
-  return (
-    <Layouts title={"About Us - Electronic Shop"}>
-      <h1>ABOUT US</h1>
-    </Layouts>
-  );
+import Layout from "../components/layouts/Layouts.js";
+
+const AboutUs = () => {
+  return <Layout title={"About us - Ecommer app"}></Layout>;
 };
 
-export default About;
+export default AboutUs;

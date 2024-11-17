@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import Layouts from "../../components/layouts/Layouts";
-import "./Register.css";
-import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
+import Layout from "../../components/layouts/Layouts.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+ 
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -13,113 +12,110 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
-
   const navigate = useNavigate();
 
+  // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/auth/register`,
-        { name, email, password, phone, address, answer }
-      );
-
+      const res = await axios.post("/api/v1/auth/register", {
+        name,
+        email,
+        password,
+        phone,
+        address,
+        answer,
+      });
       if (res && res.data.success) {
-        toast.success(res.data.message, {
-          duration: 4000,
-          position: "top-center",
-        });
+        toast.success(res.data && res.data.message);
         navigate("/login");
+      } else {
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something Went Wrong");
+      toast.error("Something went wrong");
     }
   };
+
   return (
-    <Layouts title={"Register - Electronic Shop"}>
-      <div className="mainclass">
-        <div className="wrapper">
-          <h2>Registration</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="input-box">
-              <input
-                type="text"
-                placeholder="Enter your name"
-                required
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                required
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box">
-              <input
-                type="password"
-                placeholder="Create password"
-                required
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box">
-              <input
-                type="text"
-                placeholder="Enter your Phone"
-                required
-                value={phone}
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box">
-              <input
-                type="text"
-                placeholder="Enter your address"
-                required
-                value={address}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box">
-              <input
-                type="text"
-                placeholder="What is Your Favourite Food"
-                required
-                value={answer}
-                onChange={(e) => {
-                  setAnswer(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box button">
-              <input type="Submit" defaultValue="Register Now" />
-            </div>
-            <div className="text">
-              <h3>
-                Already have an account? <Link to="/login">Login now</Link>
-              </h3>
-            </div>
-          </form>
-        </div>
+    <Layout title="Register - Ecommer App">
+      <div className="form-container ">
+        <form onSubmit={handleSubmit}>
+          <h4 className="title">REGISTER FORM</h4>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Name"
+              required
+              autoFocus
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Email "
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Enter Your Password"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Phone"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Address"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="What is Your Favorite sports"
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            REGISTER
+          </button>
+        </form>
       </div>
-    </Layouts>
+    </Layout>
   );
 };
 

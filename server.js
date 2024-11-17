@@ -5,6 +5,8 @@ import morgan from "morgan";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
+import categoryRoutes from "./routes/categoryRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
 
 //Configure Dotenv
 dotenv.config();
@@ -22,6 +24,8 @@ app.use(morgan("dev"));
 
 //rotues
 app.use("/api/auth/", authRoutes);
+app.use("/api/category/", categoryRoutes);
+app.use("/api/product/", productRoutes);
 
 //Rest API
 app.get("/", (req, res) => {
@@ -33,5 +37,5 @@ const PORT = process.env.PORT || 8080;
 
 //Run Listen
 app.listen(PORT, () => {
-  console.log(`Server ${PORT} par chal raha hain`.bgWhite.black);
+  console.log(`Server chal raha h bhai ${PORT} pe`.bgWhite.black);
 });

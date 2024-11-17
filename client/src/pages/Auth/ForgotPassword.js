@@ -1,84 +1,84 @@
 import React, { useState } from "react";
-import Layouts from "../../components/layouts/Layouts";
-import "./Register.css";
-import toast from "react-hot-toast";
+import Layout from "../../components/layouts/Layouts.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-const ForgotPassword = () => {
+const ForgotPasssword = () => {
   const [email, setEmail] = useState("");
-  const [newpassword, setNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [answer, setAnswer] = useState("");
 
   const navigate = useNavigate();
 
+  // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/auth/forgot-password`,
-        { email, newpassword, answer }
-      );
-
+      const res = await axios.post("/api/v1/auth/forgot-password", {
+        email,
+        newPassword,
+        answer,
+      });
       if (res && res.data.success) {
-        toast.success(res.data.message);
+        toast.success(res.data && res.data.message);
 
         navigate("/login");
+      } else {
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something Went Wrong");
+      toast.error("Something went wrong");
     }
   };
-
   return (
-    <Layouts title={"Forgot Password - Electronic Shop"}>
-      <div className="mainclass">
-        <div className="wrapper">
-          <h2>Forgot Password</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="input-box">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                required
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box">
-              <input
-                type="text"
-                placeholder="Enter your Favourite Food"
-                required
-                value={answer}
-                onChange={(e) => {
-                  setAnswer(e.target.value);
-                }}
-              />
-            </div>
-            <div className="input-box">
-              <input
-                type="password"
-                placeholder="Change password"
-                required
-                value={newpassword}
-                onChange={(e) => {
-                  setNewPassword(e.target.value);
-                }}
-              />
-            </div>
+    <Layout title={"Forgot Password - Ecommerce APP"}>
+      <div className="form-container ">
+        <form onSubmit={handleSubmit}>
+          <h4 className="title">RESET PASSWORD</h4>
 
-            <div className="input-box button">
-              <input type="Submit" defaultValue="Change Password" />
-            </div>
-          </form>
-        </div>
+          <div className="mb-3">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Email "
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your favorite Sport Name "
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Enter Your Password"
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            RESET
+          </button>
+        </form>
       </div>
-    </Layouts>
+    </Layout>
   );
 };
 
-export default ForgotPassword;
+export default ForgotPasssword;

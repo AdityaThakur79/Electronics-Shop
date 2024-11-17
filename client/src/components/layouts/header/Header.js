@@ -1,16 +1,13 @@
 import React from "react";
 import "./Header.css";
-import Head from "./Head";
 import Search from "./Search";
-import Navbar from "./Navbar";
+import MainNavbar from "./Navbar.js";
 
 const Header = () => {
   return (
     <>
-      <Head />
       <Search />
-      {/* <Search CartItem={CartItem} /> */}
-      <Navbar />
+      <MainNavbar />
     </>
   );
 };

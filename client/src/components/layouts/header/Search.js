@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../../context/auth";
 import toast from "react-hot-toast";
 
@@ -27,7 +27,7 @@ const Search = ({ CartItem }) => {
         <div className="container c_flex">
           <div className="logo width ">
             <Link to="/">
-              <h2>Gadget Galaxy</h2>
+              <h4>Gadget Galaxy</h4>
             </Link>
           </div>
 
@@ -49,24 +49,50 @@ const Search = ({ CartItem }) => {
               </>
             ) : (
               <>
-                <div class="dropdown">
-                  <button class="dropbtn" />
-                  <img src="/images/pp.jpg" alt="Profile" class="profile-img" />
-                  <div class="dropdown-content">
-                    <Link to="/" style={{ margin: "10px" }}>
-                      Dashboard
-                    </Link>
-                    <Link
-                      to="/login"
-                      style={{ margin: "10px" }}
-                      onClick={handleLogout}
-                    >
-                      Logout <i className="fa-solid fa-right-from-bracket"></i>
-                    </Link>
-                  </div>
+                <div
+                  className="dropdown"
+                  style={{ position: "relative", zIndex: 9999 }}
+                >
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="/images/pp.jpeg"
+                      alt="Profile"
+                      className="profile-img"
+                    />
+
+                    {auth?.user.role == 1 ? "Admin" : "User"}
+                  </button>
+                  <ul className="dropdown-menu" style={{ zIndex: 9999 }}>
+                    <li>
+                      <NavLink
+                        to={`/dashboard/${
+                          auth?.user?.role === 1 ? "admin" : "user"
+                        }`}
+                        style={{ margin: "10px" }}
+                      >
+                        Dashboard
+                      </NavLink>
+                    </li>
+                    <li>
+                      <Link
+                        to="/login"
+                        style={{ margin: "10px" }}
+                        onClick={handleLogout}
+                      >
+                        Logout{" "}
+                        <i className="fa-solid fa-right-from-bracket"></i>
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
               </>
             )}
+
             <div className="cart">
               <Link to="/cart">
                 <i className="fa fa-shopping-bag icon-circle"></i>

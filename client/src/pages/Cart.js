@@ -1,11 +1,12 @@
-import React from "react";
-import Layouts from "../components/layouts/Layouts";
+import React from 'react'
+import Layout from "../components/layouts/Layouts.js";
+
 const Cart = () => {
   return (
-    <Layouts title={"Cart - Electronic Shop"}>
-      <h1> Cart </h1>
-    </Layouts>
-  );
-};
+    <div>
+      CART
+    </div>
+  )
+}
 
-export default Cart;
+export default Cart
