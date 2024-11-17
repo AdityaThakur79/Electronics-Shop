@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, './client/build')));
 
 // Route to serve `index.html`
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/assets/index.html'));
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 //Rest API
