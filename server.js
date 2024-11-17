@@ -7,7 +7,8 @@ import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
-import path from "path";
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 //Configure Dotenv
 dotenv.config();
@@ -28,9 +29,17 @@ app.use("/api/auth/", authRoutes);
 app.use("/api/category/", categoryRoutes);
 app.use("/api/product/", productRoutes);
 
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// Get the current file path
+const __filename = fileURLToPath(import.meta.url);
+// Get the directory name
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the assets folder
+app.use(express.static(path.join(__dirname, './client/build')));
+
+// Route to serve `index.html`
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 //Rest API
