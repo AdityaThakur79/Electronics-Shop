@@ -28,7 +28,9 @@ app.use("/api/auth/", authRoutes);
 app.use("/api/category/", categoryRoutes);
 app.use("/api/product/", productRoutes);
 
+//static files
 app.use(express.static(path.join(__dirname, "./client/build")));
+
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
