@@ -35,7 +35,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve static files from the assets folder
-app.use(express.static(path.join(__dirname, './client/assets')));
+app.use(express.static(path.join(__dirname, './client/build')));
 
 // Route to serve `index.html`
 app.get('*', (req, res) => {
