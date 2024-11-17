@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import path from "path";
 
 //Configure Dotenv
 dotenv.config();
@@ -27,10 +28,15 @@ app.use("/api/auth/", authRoutes);
 app.use("/api/category/", categoryRoutes);
 app.use("/api/product/", productRoutes);
 
-//Rest API
-app.get("/", (req, res) => {
-  res.send("<h1>Hi You Are On Home Page</h1>");
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+//Rest API
+// app.get("/", (req, res) => {
+//   res.send("<h1>Hi You Are On Home Page</h1>");
+// });
 
 //PORT
 const PORT = process.env.PORT || 8080;
